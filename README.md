@@ -114,22 +114,7 @@ This will save checkpoints under `./log/AnomalyShapeNet/stage1_CPE/`:
 - `best.pth`   – best checkpoint (by loss or accuracy, see config)
 
 For **Real3D-AD** and **IEC3D-AD**, change `--dataset` and (optionally)
-`--categories` / `--iec_root` accordingly, e.g.:
-
-```bash
-# Real3D-AD (all categories)
-python train_cpe.py \
-  --dataset Real3D \
-  --categories all \
-  --logpath ./log/Real3D/stage1_CPE/
-
-# IEC3D-AD
-python train_cpe.py \
-  --dataset IEC3DAD \
-  --iec_root datasets/IEC3DAD \
-  --categories all \
-  --logpath ./log/IEC3DAD/stage1_CPE/
-```
+`--categories` / `--iec_root` accordingly.
 
 Key options are defined in `config/train_cpe_config.py`.
 
@@ -146,32 +131,13 @@ python train_cponet.py \
   --contrastive_backbone ./log/AnomalyShapeNet/stage1_CPE/best.pth 
 ```
 
-For **Real3D-AD** and **IEC3D-AD**, similarly:
-
-```bash
-# Real3D-AD
-python train_cponet.py \
-  --dataset Real3D \
-  --categories all \
-  --logpath ./log/Real3D/stage2_CPON/ \
-  --contrastive_backbone ./log/Real3D/stage1_CPE/best.pth
-
-# IEC3D-AD
-python train_cponet.py \
-  --dataset IEC3DAD \
-  --iec_root datasets/IEC3DAD \
-  --categories all \
-  --logpath ./log/IEC3DAD/stage2_CPON/ \
-  --contrastive_backbone ./log/IEC3DAD/stage1_CPE/best.pth
-```
+For **Real3D-AD** and **IEC3D-AD**, similarly.
 
 All CPONet options are defined in `config/train_cponet_config.py`.
 
 ### (3) Evaluation (Geo-TTA + per-category metrics)
 
-The unified evaluation script `eval.py` loads Stage-1 + Stage-2 checkpoints,
-runs Geo-TTA, applies optional kNN smoothing, and reports object- and
-point-level metrics.
+The unified evaluation script `eval.py` loads Stage-1 + Stage-2 checkpoints, runs Geo-TTA.
 
 **Direct evaluation with `eval.py`**
 
@@ -224,14 +190,7 @@ categories and evaluate them one by one.
   bash run_eval_Real3D.sh
   ```
 
-- **IEC3D-AD**: edit `run_eval_IEC3DAD.sh` to set
-
-  - `CKPT_DIR`   – Stage-2 CPON checkpoints for IEC3DAD
-  - `CKPT_NAME`  – checkpoint filename
-  - `CPE_CKPT`   – Stage-1 CPE checkpoint with prototypes
-  - `IEC_ROOT`   – root folder of IEC3DAD dataset
-
-  then run:
+- **IEC3D-AD**: edit `run_eval_IEC3DAD.sh` , then run:
 
   ```bash
   bash run_eval_IEC3DAD.sh
