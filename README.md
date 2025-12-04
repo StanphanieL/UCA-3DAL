@@ -2,17 +2,13 @@
 
 ## UCA-3DAL: A Unified Contrastive Framework with Test-Time Adaptation for Robust 3D Anomaly Localization
 
-This folder contains a clean, self-contained implementation of **UCA-3DAL**
-(CPE + CPONet + Geo-TTA) for 3D point cloud anomaly localization on
-**AnomalyShapeNet**, **Real3D-AD** and **IEC3D-AD**. It is designed to be
-uploaded as an independent GitHub repository.
+This folder contains a clean, self-contained implementation of **UCA-3DAL** (CPE + CPONet + Geo-TTA) for 3D point cloud anomaly localization on **AnomalyShapeNet**, **Real3D-AD** and **IEC3D-AD**. It is designed to be uploaded as an independent GitHub repository.
 
 ---
 
 ## Environments
 
-We recommend Python 3.8 and the following versions (aligned with the authors'
-experiments):
+We recommend Python 3.8 and the following versions :
 
 - Python 3.8
 - PyTorch 1.9.0 + CUDA 11.1
@@ -89,57 +85,20 @@ Place datasets as follows:
 
 ---
 
-## Training & Evaluation
+## Evaluation (with pretrained weights)
 
-UCA-3DAL is trained in two stages:
+We provide pretrained checkpoints for quick reproduction of the main results:
 
-1. Stage-1: **CPE** (Contrastive Prototype Encoder)
-2. Stage-2: **CPONet** (Conditional Point Offset Network with DPS pseudo anomalies)
+- **AnomalyShapeNet** (CPE + CPONet):
+  - https://drive.google.com/drive/folders/1zJ0DV-_OmdKnQwRbhluqwNV1jDctALvl?usp=drive_link
+- **IEC3D-AD** (CPE + CPONet):
+  - https://drive.google.com/drive/folders/1lc1-ccDbsz5_3faWxfrmgirMukDyREAv?usp=drive_link
+- **Real3D-AD** (CPE + CPONet):
+  - https://drive.google.com/drive/folders/1mYSfD1wZtKMxjNSMuY1H0EUCgT3jrqRg?usp=sharing
 
-### (1) Stage-1: CPE Training
+Download the corresponding CPE and CPONet weights, place them under some log directory (e.g., `./log/<Dataset>/stage1_CPE/` and `./log/<Dataset>/stage2_CPON/`), and then run `eval.py` as follows.
 
-Example: unified CPE training on **AnomalyShapeNet** over all categories:
-
-```bash
-python train_cpe.py \
-  --dataset AnomalyShapeNet \
-  --categories all \
-  --logpath ./log/AnomalyShapeNet/stage1_CPE/ \
-  --epochs 150 --batch_size 32
-```
-
-This will save checkpoints under `./log/AnomalyShapeNet/stage1_CPE/`:
-
-- `latest.pth` – latest checkpoint
-- `best.pth`   – best checkpoint (by loss or accuracy, see config)
-
-For **Real3D-AD** and **IEC3D-AD**, change `--dataset` and (optionally)
-`--categories` / `--iec_root` accordingly.
-
-Key options are defined in `config/train_cpe_config.py`.
-
-### (2) Stage-2: CPONet Training
-
-After Stage-1, initialize CPONet from the CPE backbone and train the conditional
-offset regressor with diversified pseudo anomalies (region-style + local):
-
-```bash
-python train_cponet.py \
-  --dataset AnomalyShapeNet \
-  --categories all \
-  --logpath ./log/AnomalyShapeNet/stage2_CPON/ \
-  --contrastive_backbone ./log/AnomalyShapeNet/stage1_CPE/best.pth 
-```
-
-For **Real3D-AD** and **IEC3D-AD**, similarly.
-
-All CPONet options are defined in `config/train_cponet_config.py`.
-
-### (3) Evaluation (Geo-TTA + per-category metrics)
-
-The unified evaluation script `eval.py` loads Stage-1 + Stage-2 checkpoints, runs Geo-TTA.
-
-**Direct evaluation with `eval.py`**
+### Direct evaluation with `eval.py`
 
 Example: evaluate **AnomalyShapeNet** on a subset of categories:
 
@@ -166,18 +125,12 @@ python eval.py \
 For **Real3D-AD** or **IEC3D-AD**, change `--dataset` and (if needed)
 `--iec_root` / `--categories` accordingly.
 
-**Per-category evaluation with shell scripts**
+### Per-category evaluation with shell scripts
 
-For convenience, we also provide three shell scripts that loop over all
-categories and evaluate them one by one.
+For convenience, we also provide three shell scripts that loop over all categories and evaluate them one by one.
 
-- **AnomalyShapeNet**: edit `run_eval_AnomalyShapeNet.sh` to set
-
-  - `CKPT_DIR`   – folder containing Stage-2 CPON checkpoints
-  - `CKPT_NAME`  – checkpoint filename (e.g., `best.pth`)
-  - `CPE_CKPT`   – Stage-1 CPE checkpoint (with prototypes)
-
-  then run:
+- **AnomalyShapeNet**: edit `run_eval_AnomalyShapeNet.sh` to set `CKPT_DIR` /
+  `CKPT_NAME` / `CPE_CKPT`, then run:
 
   ```bash
   bash run_eval_AnomalyShapeNet.sh
@@ -190,7 +143,8 @@ categories and evaluate them one by one.
   bash run_eval_Real3D.sh
   ```
 
-- **IEC3D-AD**: edit `run_eval_IEC3DAD.sh` , then run:
+- **IEC3D-AD**: edit `run_eval_IEC3DAD.sh` to set `CKPT_DIR` / `CKPT_NAME` /
+  `CPE_CKPT` / `IEC_ROOT`, then run:
 
   ```bash
   bash run_eval_IEC3DAD.sh
@@ -198,10 +152,59 @@ categories and evaluate them one by one.
 
 ---
 
+## Training (optional)
+
+If you want to train the models yourself instead of using the pretrained checkpoints, you can use the following commands.
+
+UCA-3DAL is trained in two stages:
+
+1. Stage-1: **CPE** (Contrastive Prototype Encoder)
+2. Stage-2: **CPONet** (Conditional Point Offset Network with DPS pseudo anomalies)
+
+### (1) Stage-1: CPE Training
+
+Example: unified CPE training on **AnomalyShapeNet** over all categories:
+
+```bash
+python train_cpe.py \
+  --dataset AnomalyShapeNet \
+  --categories all \
+  --logpath ./log/AnomalyShapeNet/stage1_CPE/ \
+  --epochs 150 --batch_size 32
+```
+
+This will save checkpoints under `./log/AnomalyShapeNet/stage1_CPE/`:
+
+- `latest.pth` – latest checkpoint
+- `best.pth`   – best checkpoint (by loss or accuracy, see config)
+
+For **Real3D-AD** and **IEC3D-AD**, change `--dataset` and (optionally) `--categories` / `--iec_root` accordingly.
+
+Key options are defined in `config/train_cpe_config.py`.
+
+### (2) Stage-2: CPONet Training
+
+After Stage-1, initialize CPONet from the CPE backbone and train the conditional offset regressor with diversified pseudo anomalies (region-style + local):
+
+```bash
+python train_cponet.py \
+  --dataset AnomalyShapeNet \
+  --categories all \
+  --logpath ./log/AnomalyShapeNet/stage2_CPON/ \
+  --contrastive_backbone ./log/AnomalyShapeNet/stage1_CPE/best.pth
+```
+
+For **Real3D-AD** and **IEC3D-AD**, similarly by changing `--dataset` and the corresponding log paths.
+
+All CPONet options are defined in `config/train_cponet_config.py`.
+
+---
+
+
+
 ## Citation
 
-If you find this project helpful for your research, please consider citing the
-UCA-3DAL paper :
+If you find this project helpful for your research, please consider citing the UCA-3DAL paper :
 
 ```bibtex
 @inproceedings{UCA3DAL,
