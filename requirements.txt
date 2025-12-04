@@ -1,0 +1,15 @@
+# Python-only dependencies for UCA-3DAL
+# Install PyTorch and MinkowskiEngine separately as described in README.
+
+# Numerical / scientific
+numpy==1.24.4
+scikit-learn>=0.24
+
+# 3D point cloud / mesh IO
+open3d>=0.15
+
+# Logging / visualization
+tensorboardX>=2.1
+
+# Utilities
+tqdm>=4.60
