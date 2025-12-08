@@ -57,6 +57,6 @@ def get_parser():
     parser.add_argument("--score_quantile", type=float, default=0.99, help="quantile used when score_method='quantile'")
 
     # spatial smoothing for point scores
-    parser.add_argument("--smooth_knn", type=int, default=16, help="kNN smoothing for point scores (0 disables)",)
+    parser.add_argument("--smooth_knn", type=int, default=0, help="kNN smoothing for point scores (0 disables)",)
 
     return parser
