@@ -55,13 +55,13 @@ def get_parser():
     # DPS (Diversified Pseudo-Anomaly Synthesis) parameters for AnomalyShapeNet
     parser.add_argument("--region_anom_prob", type=float, default=0.15, help="prob. to use region-style anomaly")
     parser.add_argument("--region_K_max", type=int, default=2, help="max regions per sample")
-    parser.add_argument("--region_area_min", type=float, default=0.15, help="min area fraction per region")
-    parser.add_argument("--region_area_max", type=float, default=0.25, help="max area fraction per region")
-    parser.add_argument("--region_soft_min", type=float, default=0.05, help="min soft boundary ratio")
-    parser.add_argument("--region_soft_max", type=float, default=0.20, help="max soft boundary ratio")
-    parser.add_argument("--region_amp_min", type=float, default=0.05, help="min displacement amplitude")
-    parser.add_argument("--region_amp_max", type=float, default=0.25, help="max displacement amplitude")
-    parser.add_argument("--region_mix_sign_prob", type=float, default=0.8, help="prob. to mix convex/concave signs")
+    parser.add_argument("--region_area_min", type=float, default=0.05, help="min area fraction per region")
+    parser.add_argument("--region_area_max", type=float, default=0.10, help="max area fraction per region")
+    parser.add_argument("--region_soft_min", type=float, default=0.08, help="min soft boundary ratio")
+    parser.add_argument("--region_soft_max", type=float, default=0.15, help="max soft boundary ratio")
+    parser.add_argument("--region_amp_min", type=float, default=0.02, help="min displacement amplitude")
+    parser.add_argument("--region_amp_max", type=float, default=0.10, help="max displacement amplitude")
+    parser.add_argument("--region_mix_sign_prob", type=float, default=0.1, help="prob. to mix convex/concave signs")
 
     # warm start from Stage-1 backbone
     parser.add_argument("--contrastive_backbone", type=str, default="", help="path to Stage-1 CPE checkpoint whose backbone will initialize CPONet")

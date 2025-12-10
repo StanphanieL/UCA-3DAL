@@ -54,8 +54,4 @@ def get_parser():
     parser.add_argument("--proto_loss_weight", type=float, default=0.2, help="weight for prototype NCE loss")
     parser.add_argument("--contrastive_best_metric", type=str, default="loss", choices=["loss", "acc"], help="criterion to select best checkpoint")
 
-    # # optional embedding snapshot saving (disabled by default)
-    # parser.add_argument("--emb_save_samples", type=int, default=0, help="max embeddings to store per snapshot")
-    # parser.add_argument("--emb_save_every", type=int, default=100, help="epoch interval for embedding snapshot")
-
     return parser

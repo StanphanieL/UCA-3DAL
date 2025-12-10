@@ -35,7 +35,7 @@ for category in "${categories[@]}"; do
     --tta_scale 0.05 \
     --tta_jitter 0.002 \
     --score_method quantile \
-    --score_quantile 0.99 \
+    --score_quantile 0.999 \
     --print_pos_rate \
     --cache_io
 
