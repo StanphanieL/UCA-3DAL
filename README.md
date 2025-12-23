@@ -208,7 +208,7 @@ If you find this project helpful for your research, please consider citing the U
 ```bibtex
 @inproceedings{UCA3DAL,
   title   = {UCA-3DAL: A Unified Contrastive Framework with Test-Time Adaptation for Robust 3D Anomaly Localization},
-  author  = {...},
+  author  = {Linna Liu， Hanzhe Liang, Can Gao, Wei Zhuo, Linlin Shen, Jinbao Wang},
   booktitle = {...},
   year    = {2025}
 }
