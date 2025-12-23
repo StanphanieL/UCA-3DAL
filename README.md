@@ -87,14 +87,13 @@ Place datasets as follows:
 
 ## Evaluation (with pretrained weights)
 
-We provide pretrained checkpoints for quick reproduction of the main results:
+We provide pretrained checkpoints for quick reproduction of the main results in the following table:
 
-- **AnomalyShapeNet** (CPE + CPONet):
-  - https://drive.google.com/drive/folders/1zJ0DV-_OmdKnQwRbhluqwNV1jDctALvl?usp=drive_link
-- **IEC3D-AD** (CPE + CPONet):
-  - https://drive.google.com/drive/folders/1lc1-ccDbsz5_3faWxfrmgirMukDyREAv?usp=drive_link
-- **Real3D-AD** (CPE + CPONet):
-  - https://drive.google.com/drive/folders/1mYSfD1wZtKMxjNSMuY1H0EUCgT3jrqRg?usp=sharing
+| Dataset | CheckPoint |
+|--------|--------------|
+| AnomalyShapeNet (CPE + CPONet) | [Google Drive](https://drive.google.com/drive/folders/1zJ0DV-_OmdKnQwRbhluqwNV1jDctALvl?usp=drive_link) |
+| IEC3D-AD (CPE + CPONet) | [Google Drive](https://drive.google.com/drive/folders/1lc1-ccDbsz5_3faWxfrmgirMukDyREAv?usp=drive_link) |
+| Real3D-AD (CPE + CPONet) | [Google Drive](https://drive.google.com/drive/folders/1mYSfD1wZtKMxjNSMuY1H0EUCgT3jrqRg?usp=sharing) |
 
 Download the corresponding CPE and CPONet weights, place them under some log directory (e.g., `./log/<Dataset>/stage1_CPE/` and `./log/<Dataset>/stage2_CPON/`), and then run `eval.py` as follows.
 
@@ -214,3 +213,28 @@ If you find this project helpful for your research, please consider citing the U
   year    = {2025}
 }
 ```
+
+## License
+
+```
+MIT License
+
+Copyright (c) 2025 Linna Liu
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
