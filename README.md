@@ -209,7 +209,7 @@ If you find this project helpful for your research, please consider citing the U
 @inproceedings{UCA3DAL,
   title   = {UCA-3DAL: A Unified Contrastive Framework with Test-Time Adaptation for Robust 3D Anomaly Localization},
   author  = {Linna Liu， Hanzhe Liang, Can Gao, Wei Zhuo, Linlin Shen, Jinbao Wang},
-  booktitle = {...},
+  booktitle = {Arxiv},
   year    = {2025}
 }
 ```
@@ -237,4 +237,5 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+
 SOFTWARE.
